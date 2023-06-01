@@ -1,0 +1,47 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+}
+
+main {
+    margin: 20px;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+#reviews {
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+
+#newReview {
+    margin-top: 20px;
+    width: 100%;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+button:hover {
+    background-color: #0056b3;
+}
+
+.review {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
