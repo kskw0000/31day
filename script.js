@@ -1,6 +1,5 @@
 document.getElementById('submitReviewButton').addEventListener('click', function() {
     const newReview = document.getElementById('newReview').value;
-
     fetch('http://localhost:3000/reviews', {
         method: 'POST',
         headers: {
@@ -8,17 +7,33 @@ document.getElementById('submitReviewButton').addEventListener('click', function
         },
         body: JSON.stringify({text: newReview}),
     })
-    .then(response => {
-        if (response.ok) {
-            alert("Review submitted successfully!");
-        } else {
-            alert("Failed to submit review.");
-        }
+    .then(() => {
+        // 送信が成功したら、新しいレビュー一覧を取得して表示する
+        fetch('http://localhost:3000/reviews')
+            .then(response => response.json())
+            .then(data => {
+                const reviewsDiv = document.getElementById('reviews');
+                // 既存のレビューをクリアする
+                while (reviewsDiv.firstChild) {
+                    reviewsDiv.removeChild(reviewsDiv.firstChild);
+                }
+                // 新しいレビュー一覧を表示する
+                data.forEach(review => {
+                    const reviewDiv = document.createElement('div');
+                    reviewDiv.classList.add('review');  // CSS styling
+                    reviewDiv.textContent = review.text;
+                    reviewsDiv.appendChild(reviewDiv);
+                });
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
     })
-    .catch(error => console.error('Error:', error));
-
-    //... remaining code ...
+    .catch((error) => {
+        console.error('Error:', error);
+    });
 });
+
 
 
 // Get the "Add Review" button, the review form, the textarea, and the "Submit Review" button
